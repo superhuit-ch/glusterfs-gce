@@ -7,8 +7,9 @@ source settings
 # 
 for (( i=1; i<=${COUNT}; i++ ))
 do
-  echo "Run upgrade of packages on ${SERVER}-${i} server ..."
-  gcloud compute ssh --zone ${REGION}-${ZONES[$i-1]} ${SERVER}-${i} --command "sudo apt-get update && yes | sudo apt-get upgrade"
-  echo " "
+	echo "Run upgrade of packages on ${SERVER}-${i} server ..."
+	gcloud compute ssh --zone ${REGION}-${ZONES[$i-1]} ${SERVER}-${i} --command \
+	"sudo apt-get update && yes | sudo apt-get upgrade"
+	echo " "
 done
 echo " "
