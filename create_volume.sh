@@ -8,6 +8,7 @@ then
 fi
 
 VOLUME=$1
+BRICK=$2
 
 # Get settings from the file
 source cluster/settings
@@ -16,9 +17,9 @@ source cluster/settings
 for (( i=1; i<=${COUNT}; i++ ))
 do
   echo "Create the folder ${VOLUME} on ${SERVER}-${i} ..."
-  gcloud compute ssh --zone ${REGION}-${ZONES[$i-1]} ${SERVER}-${i} --command "sudo mkdir /data/brick1/${VOLUME} && sudo chmod 777 /data/brick1/${VOLUME}"
+  gcloud compute ssh --zone ${REGION}-${ZONES[$i-1]} ${SERVER}-${i} --command "sudo mkdir /data/${BRICK}/${VOLUME} && sudo chmod 777 /data/${BRICK}/${VOLUME}"
   # concatenate servers/bricks
-  CLUSTER=$CLUSTER${SPACE}${SERVER}-${i}:/data/brick1/${VOLUME}
+  CLUSTER=$CLUSTER${SPACE}${SERVER}-${i}:/data/${BRICK}/${VOLUME}
 done
 echo " "
 
